@@ -1,0 +1,18 @@
+# Gensyn AXL config — Observer/Admin node
+
+[node]
+id          = "observer-node"
+data_dir    = "./.axl-data/observer"
+
+[network]
+listen_port = 5703
+http_port   = 7703
+
+[bootstrap]
+peers = [
+  "127.0.0.1:5701",
+  "127.0.0.1:5702"
+]
+
+[security]
+require_envelope_signature = true

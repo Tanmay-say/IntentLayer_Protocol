@@ -1,0 +1,29 @@
+{
+  "name": "@intentlayer/telegram-wallet",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "IntentLayer Agentic Wallet — Telegram bot operator surface (Phase D)",
+  "scripts": {
+    "start": "tsx src/bot.ts",
+    "dev": "tsx watch src/bot.ts",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@intentlayer/axl-transport": "workspace:*",
+    "@intentlayer/intent-core": "workspace:*",
+    "axios": "^1.7.7",
+    "eventsource": "^2.0.2",
+    "pino": "^9.5.0",
+    "telegraf": "^4.16.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/eventsource": "^1.1.15",
+    "@types/node": "^20.16.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

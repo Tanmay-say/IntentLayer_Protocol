@@ -1,0 +1,15 @@
+{
+  "@context": "https://erc8004.org/v1",
+  "type": "AgentCard",
+  "name": "IntentLayer Agent B",
+  "description": "Payee / service agent — verifies IntentProofs, scans ERC-5564 announcements, sweeps stealth USDC via Pimlico paymaster.",
+  "agentDomain": "agent-b.intentlayer.local",
+  "agentAddress": "0x0000000000000000000000000000000000000000",
+  "policyWallet": "0x0000000000000000000000000000000000000000",
+  "axl": { "endpoint": "http://127.0.0.1:7702", "nodeId": "agent-b-node" },
+  "trustModels": ["eip712-policy", "tenderly-sim", "erc5564-stealth", "erc4337-paymaster"],
+  "stealthMetaAddress": "st:base:0x",
+  "paymentAddress": "0x0000000000000000000000000000000000000000",
+  "supportedChains": [84532],
+  "protocol": { "name": "intentlayer", "version": "0.2.0" }
+}

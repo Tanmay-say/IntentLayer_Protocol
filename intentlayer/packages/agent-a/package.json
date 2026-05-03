@@ -1,0 +1,22 @@
+{
+  "name": "@intentlayer/agent-a",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "lint": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@intentlayer/axl-transport": "workspace:*",
+    "@intentlayer/intent-core": "workspace:*",
+    "@intentlayer/agent-identity": "workspace:*",
+    "dotenv": "^16.4.5",
+    "viem": "^2.21.0",
+    "pino": "^9.5.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

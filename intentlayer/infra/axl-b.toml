@@ -1,0 +1,18 @@
+# Gensyn AXL config — Agent B node
+
+[node]
+id          = "agent-b-node"
+data_dir    = "./.axl-data/b"
+
+[network]
+listen_port = 5702
+http_port   = 7702
+
+[bootstrap]
+peers = [
+  "127.0.0.1:5701",
+  "127.0.0.1:5703"
+]
+
+[security]
+require_envelope_signature = true

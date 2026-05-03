@@ -1,0 +1,48 @@
+{
+  "name": "intentlayer-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "IntentLayer — policy-enforced, stealth A2A payments over Gensyn AXL",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "dev": "pnpm --parallel --filter @intentlayer/admin-api --filter @intentlayer/admin-web dev",
+    "admin:api": "pnpm --filter @intentlayer/admin-api start",
+    "admin:web": "pnpm --filter @intentlayer/admin-web start",
+    "stack:start": "./scripts/start-real-stack.sh",
+    "stack:real": "./scripts/start-real-stack.sh",
+    "stack:mock": "./scripts/start-live-stack.sh",
+    "stack:stop": "./scripts/stop-live-stack.sh",
+    "env:rotate": "tsx scripts/rotate-env-secrets.ts",
+    "deploy:fresh": "tsx scripts/deploy-fresh.ts",
+    "deploy:check": "tsx scripts/check-deployment.ts",
+    "agent:a": "pnpm --filter @intentlayer/agent-a start",
+    "agent:b": "pnpm --filter @intentlayer/agent-b start",
+    "agent:observer": "pnpm --filter @intentlayer/observer-agent start",
+    "telegram:start": "pnpm --filter @intentlayer/telegram-wallet start",
+    "telegram:dev": "pnpm --filter @intentlayer/telegram-wallet dev",
+    "mcp:build": "pnpm --filter @intentlayer/mcp-server build",
+    "mcp:start": "pnpm --filter @intentlayer/mcp-server start",
+    "axl:real": "scripts/start-axl.sh",
+    "axl:mock": "scripts/start-axl-mock.sh",
+    "axl:stop": "pkill -F /tmp/axl-a.pid 2>/dev/null; pkill -F /tmp/axl-b.pid 2>/dev/null; pkill -F /tmp/axl-observer.pid 2>/dev/null; pkill -F /tmp/axl-mock.pid 2>/dev/null; true",
+    "live": "pnpm stack:real",
+    "contracts:build": "pnpm --filter @intentlayer/contracts build",
+    "contracts:test": "pnpm --filter @intentlayer/contracts test",
+    "scenario:heartbeat": "tsx demo/scenario-heartbeat.ts",
+    "scenario:policy-block": "tsx demo/scenario-policy-block.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "viem": "^2.21.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^20.16.0"
+  }
+}

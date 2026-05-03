@@ -1,0 +1,12 @@
+{
+  "name": "@intentlayer/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test -vvv",
+    "fmt": "forge fmt",
+    "deploy:identity": "forge script script/DeployIdentity.s.sol --rpc-url base_sepolia --broadcast --verify",
+    "deploy:core": "forge script script/DeployCore.s.sol --rpc-url base_sepolia --broadcast --verify"
+  }
+}

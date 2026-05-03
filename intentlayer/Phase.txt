@@ -1,0 +1,111 @@
+# IntentLayer MVP — Phase Progress Tracker
+# Auto-updated by build agent. Last update timestamps in UTC.
+
+==============================================================
+LEGEND:  [ ] not started   [~] in progress   [x] complete   [!] blocked
+==============================================================
+
+PHASE 1 (PRD Phase 0) — ERC-8004 AGENT IDENTITY
+  [x] 1.1  Create monorepo skeleton (pnpm workspaces)
+  [x] 1.2  Author agent card JSONs (agent-a, agent-b)
+  [x] 1.3  Solidity IdentityRegistry contract (ERC-8004 reference)
+  [x] 1.4  Foundry test for IdentityRegistry
+  [x] 1.5  Deployment script (Foundry) -> Base Sepolia
+  [x] 1.6  agent-identity TS package: register + resolve agents
+  STATUS:    COMPLETE
+
+PHASE 2 (PRD Phase 1) — FOUNDATION SETUP
+  [x] 2.1  Foundry config (foundry.toml, remappings)
+  [x] 2.2  PolicyWallet.sol (EIP-712 verifier + execute)
+  [x] 2.3  IntentNoteRegistry.sol (BUG #1 fixed — no useless indexed timestamp)
+  [x] 2.4  StealthAnnouncement.sol (BUG #2 fixed — schemeId uint256 per ERC-5564)
+  [x] 2.5  Foundry tests for all four contracts
+  [x] 2.6  Deploy scripts -> Base Sepolia
+  [x] 2.7  AXL install docs (real Go binary path) + AXL_SETUP.md
+  [x] 2.8  AXL config files (axl-a.toml, axl-b.toml; JSON dupes removed — BUG #7)
+  [x] 2.9  axl-transport TS package (HTTP wrapper + Zod schemas)
+  [x] 2.10 axl-mock package (in-process dev daemon, same API surface)
+  STATUS:    COMPLETE
+
+PHASE 3 (PRD Phase 2) — INTENT PROOF ENGINE
+  [x] 3.1  intent-core types (IntentProof, ActionType, Policy)
+  [x] 3.2  EIP-712 domain + typed-data builder
+  [x] 3.3  Sign + verify intent proofs (viem)
+  [x] 3.4  Policy validator (real allowedCalls — BUG #3 fixed)
+  [x] 3.5  Tenderly simulation client
+  [x] 3.6  Signed AXL envelope helper (BigInt-safe — BUG #4 fixed)
+  [x] 3.7  Vitest unit tests
+  [x] 3.8  agent-a uses real policyHash matching agent-b (BUG #5 fixed)
+  STATUS:    COMPLETE
+
+PHASE 4 (PRD Phase 3) — STEALTH A2A PAYMENTS
+  [x] 4.1  intent-core/stealth.ts — ERC-5564 SECP256K1 generate/scan/claim
+  [x] 4.2  intent-core/paymaster.ts — Pimlico ERC-4337 USDC sweep
+  [x] 4.3  agent-a stealth flow (decodeMetaAddress -> generate -> NOTIFY)
+  [x] 4.4  agent-b stealth flow (scanForPayment -> sweepStealthUSDC)
+  [x] 4.5  STEALTH_CLAIM_NOTIFY message type wired through AXL transport
+  [x] 4.6  Vitest stealth tests (round-trip + meta encode/decode)
+  [x] 4.7  Graceful shutdown (SIGINT/SIGTERM) — BUG #6 fixed
+  [x] 4.8  Web dashboard (FastAPI + React) showing phase / contracts / stealth status
+  STATUS:    COMPLETE — onchain run requires user-provided PIMLICO_API_KEY + RPC + deployer key
+
+PHASE 5  Demo, Docs, FEEDBACK.md       [x] (FEEDBACK.md authored, AXL_SETUP.md authored)
+PHASE 6  Uniswap Integration            [ ] (deferred)
+
+PHASE v6-A  Critical bug-fix sprint  [x] 2026-01-15T00:00:00Z
+  [x] A.1  Kill agent-a → stealthAddr ETH link (NEW-1) + drop EOA sweep (NEW-4)
+  [x] A.2  Tenderly hard gate before stealth sweep (NEW-3)
+  [x] A.3  Production guard on admin-api token (NEW-5)
+  [x] A.4  Replay-dedup STEALTH_CLAIM_NOTIFY envelopes (NEW-6)
+  [x] A.5  Pimlico gas-USDC slippage cap (NEW-7)
+  STATUS:    COMPLETE — see v6phase.md
+
+PHASE v6-B  Real AXL Go binary on demo box  [x] 2026-01-15T00:00:00Z
+  [x] B.1  Add `pnpm axl:real` / `pnpm axl:mock` / `pnpm axl:stop` scripts
+  [x] B.2  Confirm axl-mock not referenced by default `dev` / `live` scripts
+  [x] B.3  docs/AXL_SETUP.md reviewed; ports + TOML configs current
+  STATUS:    COMPLETE (operator must run install-axl.sh on the demo box)
+
+PHASE v6-C  Hackathon demo polish  [x] 2026-01-15T00:00:00Z
+  [x] C.1  docs/DEMO_STORYBOARD.md written (≤ 4-min judge-facing run)
+  [x] C.2  README architecture diagram (Mermaid) + "Why this is hard"
+  [x] C.3  FEEDBACK.md reviewed for Gensyn submission
+  STATUS:    COMPLETE — pre-recorded fallback videos deferred to operator
+
+PHASE v6-D  Telegram Agentic Wallet      [x] 2026-01-15T00:00:00Z
+  [x] D.1  apps/telegram-wallet/ scaffolded (Telegraf + SSE + auth)
+  [x] D.2  Read commands: /status /balance /agents /tx
+  [x] D.3  Write commands w/ 30s CONFIRM: /pay /pause /resume /reject
+  [x] D.4  Whitelisted TELEGRAM_OPERATOR_IDS auth + 2-step confirm registry
+  [x] D.5  admin-api endpoints: /api/commands/admin, /api/intent/:id,
+           /api/commands/reject-pending, /api/commands/emergency-stop, /api/policy
+  [x] D.6  docs/TELEGRAM_SETUP.md with BotFather + operator-id walkthrough
+  STATUS:    AUDIT-ONLY scaffold per user instruction — reviewer must run
+             `pnpm -r install && pnpm -r build && pnpm -r lint && pnpm -r test`
+             before launching against testnet/mainnet admin-api.
+
+PHASE v6-E  MCP server                   [x] 2026-01-15T00:00:00Z
+  [x] E.1  apps/mcp-server/ scaffolded (@modelcontextprotocol/sdk 1.x, stdio)
+  [x] E.2  13 tools wired (status, balances, get_intent, list_recent_intents,
+           pay_stealth, pause_agent, resume_agent, simulate_tenderly,
+           compute_policy_hash, register_agent_card, resolve_agent_card,
+           get_logs, emergency_stop)
+  [x] E.3  4 resources wired (agents://, events://recent, contracts://,
+           policy://current)
+  [x] E.4  Auth: INTENTLAYER_MCP_TOKEN → ADMIN_COMMAND_TOKEN fallback
+  [x] E.5  docs/MCP_SETUP.md with Claude Desktop config snippet
+  STATUS:    AUDIT-ONLY scaffold per user instruction — reviewer must run
+             `pnpm --filter @intentlayer/mcp-server build` then point Claude
+             Desktop at apps/mcp-server/dist/index.js.
+
+PHASE v6-F  Testnet 72-hour soak         [ ] (deferred — requires real run-loop)
+PHASE v6-G  Mainnet deployment           [ ] (deferred — gated on Phase F)
+PHASE v6-H  Global A2A path              [ ] (deferred — post-launch)
+
+==============================================================
+NOTES
+==============================================================
+- yarn.lock removed — pnpm-only (BUG #8 fixed)
+- All onchain operations gated behind .env values; no demo hardcoding.
+- AXL Go binary cannot run inside this preview container; use scripts/start-axl-mock.sh
+  for local dev/CI; scripts/install-axl.sh + scripts/start-axl.sh for the real binary.

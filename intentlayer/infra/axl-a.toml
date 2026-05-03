@@ -1,0 +1,21 @@
+# Gensyn AXL config — Agent A node
+# Real binary expects this TOML; key names verified against gensyn-ai/axl Feb 2026.
+
+[node]
+id          = "agent-a-node"
+data_dir    = "./.axl-data/a"
+
+[network]
+listen_port = 5701   # AXL p2p
+http_port   = 7701   # localhost HTTP surface (used by axl-transport)
+
+[bootstrap]
+peers = [
+  # When running both daemons locally, A bootstraps off B's p2p port.
+  "127.0.0.1:5702",
+  "127.0.0.1:5703"
+]
+
+[security]
+# In real deploy, sign every outbound envelope with the agent's EOA.
+require_envelope_signature = true
